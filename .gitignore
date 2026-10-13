@@ -1,0 +1,41 @@
+# .NET
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+*.sln.docstates
+TestResults/
+**/TestResults/
+*.trx
+*.nupkg
+*.snupkg
+
+# Node.js y resultados generados
+**/node_modules/
+**/dist/
+**/build/
+**/coverage/
+**/.next/
+**/.vite/
+**/.turbo/
+*.tsbuildinfo
+*.log
+
+# Entornos y secretos
+.env
+.env.*
+!.env.example
+secrets/
+**/secrets/
+*.pem
+*.key
+*.pfx
+*.p12
+*.jks
+.aws/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
