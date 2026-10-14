@@ -2,7 +2,7 @@
 
 ## Aprobado y resuelto
 
-React/TypeScript/Vite (dos PWA y Central web), API .NET 8, monolito modular por funcionalidades, Neon/PostgreSQL, EF Core/Npgsql, SignalR y Leaflet/OpenStreetMap están **aprobados por el responsable**, no pendientes: [ADR-002](decisions/0002-arquitectura-definitiva.md). No son obligaciones tecnológicas textuales de los PDF.
+React/TypeScript/Vite (dos PWA y Central web), API .NET 10 LTS (aprobada inicialmente como .NET 8 y migrada antes de la Etapa 2.3), monolito modular por funcionalidades, Neon/PostgreSQL, EF Core/Npgsql, SignalR y Leaflet/OpenStreetMap están **aprobados por el responsable**, no pendientes: [ADR-002](decisions/0002-arquitectura-definitiva.md). No son obligaciones tecnológicas textuales de los PDF.
 
 La lectura de los PDF está resuelta con Poppler 25.07.0. El anterior registro local DP-01–DP-04 era un listado de bloqueos/validaciones propio del repositorio: **no corresponde a DP01–DP22 de las fuentes**. Se sustituye por este registro; lectura cerrada, trazabilidad recuperada y aprobación de stack registrada. No acredita aceptación de HU ni aprobación íntegra del análisis.
 
@@ -47,7 +47,7 @@ SCR §4.1 p.34 y §5 p.38 exige resolver o documentar DP01/DP02/DP04/DP11/DP14 y
 | PROY-02 | Aprobar divisiones HU20/HU39, componente de mapa temprano y criterios citados de cancelación. ARQ D3 p.7 y SCR §3.1 pp.11–13 muestran diferencias de orden/aceptación | PO / equipo |
 | PROY-03 | Replanificar calendario y capacidad; SCR §4.5/§5 pp.37–39 y ARQ D13 p.8 no prueban avance real. Sin fechas nuevas ni SP acreditados | PO / equipo |
 | PROY-04 | Elegir proveedor frontend/backend y entorno que cumpla RNF02/03/10 frente a suspensión y arranque en frío; presupuestos/planes no aprobados por elegir Neon | Responsable / equipo |
-| PROY-05 | Concretar autenticación y sesión de las tres interfaces, CORS y seguridad de hubs; versiones compatibles y soporte de .NET 8/paquetes; modelos/mapeos EF sin ciclo Api↔Infrastructure | Arquitectura / equipo, antes de implementar esos componentes |
+| PROY-05 | Concretar autenticación y sesión de las tres interfaces, CORS y seguridad de hubs; versiones de paquetes compatibles con .NET 10 (versión y soporte resueltos en ADR-002); modelos/mapeos EF sin ciclo Api↔Infrastructure | Arquitectura / equipo, antes de implementar esos componentes |
 | PROY-06 | Obtener evidencia de RNF04/05/07/11/12/13 en navegador, carga RNF02/03 y monitor RNF10; definir herramientas y procedimiento de pruebas | QA / equipo |
 | PROY-07 | Confirmar exclusión de telefonía/ruteo/cercanía automática y estados SOS vigentes; no convertir propuestas D4–D6/D9 de ARQ p.7 en nuevas reglas sin revisar | PO |
 

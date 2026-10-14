@@ -11,7 +11,7 @@ SCR §1.4/§1.5 pp.2,8 propone dos PWA y un panel web; ARQ §3/§4 pp.12–17 y 
 | Ciudadano | React + TypeScript + Vite, PWA independiente |
 | Sereno | React + TypeScript + Vite, PWA independiente |
 | Central | React + TypeScript + Vite, aplicación web independiente |
-| Backend | ASP.NET Core Web API, .NET 8; monolito modular por funcionalidades |
+| Backend | ASP.NET Core Web API, .NET 10 LTS; monolito modular por funcionalidades |
 | Base de datos / persistencia | PostgreSQL administrado en Neon; EF Core + Npgsql |
 | Tiempo real / mapas | SignalR; Leaflet + OpenStreetMap |
 
@@ -29,9 +29,13 @@ Las PWA respetan SCR y RNF04 en píxeles CSS; interfaces por actor permiten desa
 - Endpoints y hubs delegan las escrituras a aplicación; Consultas usa lecturas/proyecciones sin escrituras. Acceso a otro módulo mediante operaciones públicas/contratos; no modificar directamente entidades internas ajenas.
 - Confirmar las operaciones y su historial en una transacción, emitir eventos después y resincronizar clientes al reconectar. PostgreSQL conserva estado; SignalR no sustituye persistencia. Implementar idempotencia/concurrencia para RNF08 sin abstraer por defecto la unidad de trabajo de EF Core.
 
+## Versión de .NET
+
+La Etapa 2.1C aprobó inicialmente .NET 8. Antes de la Etapa 2.3, el responsable aprobó migrar a **.NET 10 LTS como versión definitiva**: .NET 8 deja de tener soporte el 10/11/2026, durante el proyecto, y .NET 10 tiene soporte LTS hasta el 14/11/2028 (coincide con ARQ §4 pp.16–18). `global.json` fija el SDK 10.0.401 con `rollForward: latestFeature`; los paquetes alineados con el framework usan la línea 10.0.x. El cambio no altera arquitectura, módulos, endpoints ni RF/RNF. Consecuencia: los entornos locales y la futura CI de GitHub Actions deben instalar el SDK .NET 10 según `global.json`.
+
 ## Consecuencias y pendientes
 
-Se descarta MAUI para el MVP y Razor Pages como interfaz principal de Central. También se sustituye la versión .NET 10 propuesta por .NET 8. No se cambian los PDF: sus diagramas/unidades desplegables, contratos C# compartidos con móvil y autenticación cookie/JWT ligada a esos clientes deben adaptarse en documentación de implementación futura. RNF04 permanece en CSS y RNF05 conserva Firefox.
+Se descarta MAUI para el MVP y Razor Pages como interfaz principal de Central. No se cambian los PDF: sus diagramas/unidades desplegables, contratos C# compartidos con móvil y autenticación cookie/JWT ligada a esos clientes deben adaptarse en documentación de implementación futura. RNF04 permanece en CSS y RNF05 conserva Firefox.
 
 Tres interfaces requieren definir publicación, CORS, sesión/tokens y protección de solicitudes por navegador. Esos detalles no quedan aprobados por elegir React. GPS/despacho se validan con app visible y conexión disponible; no se promete segundo plano, push con app cerrada ni ruteo. RNF02/03/10 requieren pruebas reales en el entorno elegido; Neon no garantiza su cumplimiento por sí solo.
 

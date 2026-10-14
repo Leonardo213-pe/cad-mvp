@@ -70,7 +70,7 @@ No declarar aceptación solo por implementación. SCR §3.3 p.31 distingue imple
 
 - MVP académico de municipalidad tipo B con usuarios y coordenadas simulados. Sin canal real de emergencias ni integración PNP/Bomberos/SAMU/RENIEC, despacho IA ni compromiso de recursos estatales (SCR §1.4 p.3).
 - PWA en primer plano para GPS y despacho; sin garantía en segundo plano o app cerrada. HTTPS y cloud gratuito/educativo; disponibilidad de demostración no es servicio 24/7 (SCR §1.5 pp.7–8).
-- ARQ proponía MAUI 10, Razor Pages y ASP.NET Core 10 (pp.3,12,16; ADR originales pp.49–50). La aprobación actual establece React/PWA y API .NET 8: **decisión de implementación que sustituye esas propuestas**, no modificación de RF/RNF. No convertir RNF04 de CSS a dp ni eliminar Firefox de RNF05.
+- ARQ proponía MAUI 10, Razor Pages y ASP.NET Core 10 (pp.3,12,16; ADR originales pp.49–50). La aprobación actual establece React/PWA y API .NET 10 LTS (aprobada inicialmente como .NET 8 en la Etapa 2.1C y migrada antes de la Etapa 2.3; coincide en versión con ARQ): **decisión de implementación que sustituye MAUI y Razor Pages**, no modificación de RF/RNF. No convertir RNF04 de CSS a dp ni eliminar Firefox de RNF05.
 - Numeraciones RF distintas y equivalencias propuestas (ARQ D1 p.7, Anexo A pp.58–59); falta cobertura RF explícita de HU39 (D14 p.8). No tratarlas como correspondencias confirmadas.
 - Mapa HU25 previsto en Sprint 4 frente a criterios de HU11/HU19 anteriores (ARQ D3 p.7). ARQ propone componente temprano; requiere ratificación de planificación.
 - “Ruta exacta”, “más cercano” y “gestión de llamadas” no acreditan ruteo, selección automática o telefonía integrada (ARQ D4–D6 p.7; SCR §2.1 p.9). Confirmar interpretación del PO sin ampliar alcance.
