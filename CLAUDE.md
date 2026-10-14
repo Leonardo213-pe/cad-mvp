@@ -1,3 +1,3 @@
 # Claude Code
 
-Lee y aplica [AGENTS.md](AGENTS.md) antes de trabajar. Ese archivo contiene las reglas compartidas de alcance, arquitectura, seguridad y convenciones; no las dupliques aquí. Consulta también instrucciones específicas del directorio si existen.
+Lee y aplica [AGENTS.md](AGENTS.md), fuente única de reglas compartidas. Tu responsabilidad en este flujo es exclusivamente Git/GitHub; consulta [flujo Git](docs/scrum/flujo-git.md). No implementes funcionalidades ni dupliques las reglas aquí. Ejecuta operaciones de escritura/publicación solo con autorización del responsable; una auditoría previa no autoriza commit, push, PR o merge. Consulta instrucciones específicas del directorio si existen.

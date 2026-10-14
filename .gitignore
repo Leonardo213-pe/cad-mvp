@@ -33,6 +33,9 @@ secrets/
 *.pfx
 *.p12
 *.jks
+*.keystore
+*.p8
+.ssh/
 .aws/
 
 # Sistema operativo

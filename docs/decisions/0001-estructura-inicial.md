@@ -1,5 +1,7 @@
 # DT-001: estructura inicial del monorepositorio
 
+**Registro histórico, sustituido en arquitectura y stack por [ADR-002](../architecture/decisions/0002-arquitectura-definitiva.md).** Las cuatro capas, fuentes no verificables y selecciones pendientes que siguen describen el estado inicial, no las reglas vigentes.
+
 Estado: estructura solicitada autorizada; decisiones de implementación propuestas, pendientes de validación. Fecha: 2026-10-13.
 
 Origen: instrucción del usuario para crear únicamente el esqueleto del repositorio. No es una decisión extraída de los PDF ni acredita requisitos funcionales.

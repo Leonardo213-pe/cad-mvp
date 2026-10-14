@@ -1,0 +1,12 @@
+# Convención de texto: LF en el repositorio y en futuras extracciones de trabajo.
+* text=auto eol=lf
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+# Scripts nativos de Windows conservan CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
