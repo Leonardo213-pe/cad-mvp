@@ -9,12 +9,45 @@ Arquitectura aprobada: tres interfaces React + TypeScript + Vite; Ciudadano y Se
 | `apps/ciudadano`, `apps/sereno`, `apps/central` | Aplicaciones independientes, aún sin inicializar |
 | `backend/src/CAD.Api/Modulos` | Cuentas, Casos, Despacho, Acompanamiento y Consultas |
 | `backend/src/CAD.Infrastructure` | Persistencia e infraestructura compartida |
-| `tests/CAD.UnitTests`, `tests/CAD.IntegrationTests`, `tests/CAD.LoadTests` | Espacios reservados de pruebas |
+| `tests/CAD.UnitTests`, `tests/CAD.IntegrationTests`, `tests/CAD.LoadTests` | xUnit unitario/integración; carga reservada |
 | `docs/requirements` | PDF originales, análisis y matriz de trazabilidad |
 | `docs/architecture/decisions` | ADR vigentes; `docs/decisions` conserva la decisión histórica inicial |
 | `docs/scrum`, `docs/api`, `docs/testing` | Flujo de trabajo y documentación futura |
 | `infra/docker`, `.github/workflows` | Espacios para despliegue y CI futuros |
 
-Estado: Etapa 2.1C, estructura y documentación en revisión. Sin proyectos .NET/React, código funcional ni comandos de ejecución. Los `.gitkeep` preservan carpetas vacías. Los PDF ya son legibles; el análisis contiene 34 RF operativos, 14 RNF y 43 HU. Los CA completos dependen de una fuente [HU] no adjunta; no se acredita implementación ni aceptación.
+Estado: Etapa 2.2, backend inicial ejecutable sin historias de usuario. Solución `backend/CAD.sln`: API, infraestructura y dos proyectos xUnit, todos `net8.0`. Sin frontend inicializado, entidades de negocio, autenticación, Neon o migraciones. Los módulos permanecen vacíos. Los PDF ya son legibles; el análisis contiene 34 RF operativos, 14 RNF y 43 HU. Los CA completos dependen de una fuente [HU] no adjunta; no se acredita implementación ni aceptación de historias.
 
 Leer [AGENTS.md](AGENTS.md), [análisis](docs/requirements/analisis-requisitos.md), [matriz](docs/requirements/matriz-trazabilidad.md), [pendientes](docs/architecture/decisiones-pendientes.md) y [flujo Git](docs/scrum/flujo-git.md). El calendario original necesita revisión; no se han aprobado fechas nuevas. Codex implementa y valida; Claude Code gestiona exclusivamente Git/GitHub bajo autorización.
+
+## Ejecutar el backend
+
+Requisito: SDK .NET 8.0.426 o parche posterior de la misma banda, según `global.json`. Desde la raíz:
+
+En este equipo `DOTNET_ROOT` apuntaba a una instalación de usuario con solo .NET 10. Antes de probar o ejecutar desde PowerShell, usa estas variables **solo en la sesión actual** si continúa ese conflicto; no cambia la configuración global:
+
+```powershell
+$env:DOTNET_ROOT = "C:\Program Files\dotnet"
+$env:DOTNET_ROOT_X64 = "C:\Program Files\dotnet"
+```
+
+```powershell
+dotnet restore backend/CAD.sln
+dotnet build backend/CAD.sln --no-restore
+dotnet test backend/CAD.sln --no-build
+dotnet run --project backend/src/CAD.Api/CAD.Api.csproj --launch-profile CAD.Api
+```
+
+El perfil local usa `Development` y `http://localhost:5080`. `GET /health` devuelve `200`, texto `Healthy`: comprueba el proceso, sin verificar base de datos ni disponibilidad de negocio. Swagger UI está en `/swagger` y OpenAPI en `/swagger/v1/swagger.json`, solo en desarrollo. El hub vacío `/hubs/cad` y su negociación `POST /hubs/cad/negotiate` también se habilitan solo en desarrollo; no hay métodos ni eventos de negocio ni autorización de usuarios configurada.
+
+CORS permite únicamente los orígenes locales explícitos `http://localhost:5173`, `:5174` y `:5175` en desarrollo, con GET/POST y Content-Type, sin credenciales cross-origin. La configuración base no permite ningún origen cross-origin. Estos puertos son convenciones locales, no requisitos ni frontends ya existentes. CORS no sustituye autenticación ni controla clientes que no son navegadores.
+
+Las variables de entorno sobrescriben `appsettings`: `Cors__AllowedOrigins__0`, `AllowedHosts`, `ASPNETCORE_URLS` y `ASPNETCORE_ENVIRONMENT`. `.env.example` solo es una guía, no se carga automáticamente. Para ejecutar sin el perfil local:
+
+```powershell
+$env:ASPNETCORE_ENVIRONMENT = "Development"
+$env:ASPNETCORE_URLS = "http://localhost:5080"
+$env:Cors__AllowedOrigins__0 = "http://localhost:5173"
+dotnet run --project backend/src/CAD.Api/CAD.Api.csproj --no-launch-profile
+```
+
+En producción se exige configurar hosts, orígenes exactos y HTTPS; se aplican redirección HTTPS y HSTS. Swagger y el hub de prueba no se publican. Las excepciones generan ProblemDetails 500 con identificador de traza, sin mensaje ni stack sensibles; el logging automático de excepciones del middleware está suprimido y el handler registra solo tipo e identificador. Manejo y pruebas de integración siguen [la guía de ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-8.0) y [WebApplicationFactory](https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-8.0).
